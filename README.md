@@ -1,5 +1,7 @@
 # 💻 [SIS-112] Programación I (2-2026) UCB
 
+http://eescalante.somee.com/index.html
+
 ![Universidad Católica Boliviana](https://img.shields.io/badge/Universidad-UCB%20%22San%20Pablo%22-003366?style=for-the-badge)
 ![Carrera](https://img.shields.io/badge/Carrera-Ingeniería%20Industrial-008080?style=for-the-badge)
 ![Periodo](https://img.shields.io/badge/Periodo-2--2026-orange?style=for-the-badge)

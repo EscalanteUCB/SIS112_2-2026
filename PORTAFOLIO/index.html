@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación 1 - UCB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ucb-blue: #002B49;
+            --ucb-blue-light: #00407A;
+            --ucb-gold: #F2A900;
+            --ucb-gold-hover: #D99600;
+            --bg-light: #F4F6F9;
+            --surface: #FFFFFF;
+            --text-dark: #212529;
+            --text-muted: #6C757D;
+            --code-bg: #1E1E1E;
+            --code-text: #D4D4D4;
+            --border-radius: 10px;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header / Navbar */
+        header {
+            background-color: var(--ucb-blue);
+            color: var(--surface);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            background-color: var(--ucb-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--ucb-blue);
+            font-size: 1.2rem;
+        }
+
+        .brand-title h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-title span {
+            font-size: 0.8rem;
+            color: var(--ucb-gold);
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--surface);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--ucb-gold);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--surface);
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--ucb-blue) 0%, var(--ucb-blue-light) 100%);
+            color: var(--surface);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 5px solid var(--ucb-gold);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Main Container Layout */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            background-color: var(--surface);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+        }
+
+        .sidebar h3 {
+            color: var(--ucb-blue);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--ucb-gold);
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 0.6rem 0.8rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: var(--ucb-blue);
+            color: var(--surface);
+            padding-left: 1.2rem;
+        }
+
+        /* Units Grid & Cards */
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .unit-card {
+            background-color: var(--surface);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border-left: 6px solid var(--ucb-gold);
+            scroll-margin-top: 100px;
+        }
+
+        .unit-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .unit-badge {
+            background-color: var(--ucb-blue);
+            color: var(--ucb-gold);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .unit-card h3 {
+            color: var(--ucb-blue);
+            font-size: 1.5rem;
+        }
+
+        .unit-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            overflow-x: auto;
+            margin-top: 1rem;
+            border: 1px solid #333;
+        }
+
+        .code-title {
+            font-size: 0.75rem;
+            color: var(--ucb-gold);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Highlight List Items inside units */
+        .topics-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .topics-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .topics-list li::before {
+            content: "•";
+            color: var(--ucb-gold);
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--ucb-blue);
+            color: var(--surface);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 4rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        footer strong {
+            color: var(--ucb-gold);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none; /* Can be toggled or kept hidden on small screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--ucb-blue);
+                padding: 1.5rem;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="brand">
+                <div class="brand-logo">UCB</div>
+                <div class="brand-title">
+                    <h1>Programación 1</h1>
+                    <span>Universidad Católica Boliviana</span>
+                </div>
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#enteros">Enteros</a></li>
+                <li><a href="#cadenas">Cadenas</a></li>
+                <li><a href="#listas">Listas</a></li>
+                <li><a href="#diccionarios">Diccionarios/Matrices</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Portal de Contenido Académico</h2>
+            <p>Guía de estudio oficial de las estructuras fundamentales de la asignatura.</p>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h3>Unidades Temáticas</h3>
+            <ul>
+                <li><a href="#enteros" class="sidebar-link active">1. Enteros</a></li>
+                <li><a href="#cadenas" class="sidebar-link">2. Cadenas</a></li>
+                <li><a href="#listas" class="sidebar-link">3. Listas</a></li>
+                <li><a href="#diccionarios" class="sidebar-link">4. Diccionarios (Matrices)</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+
+            <!-- Unidad 1: Enteros -->
+            <article class="unit-card" id="enteros">
+                <div class="unit-header">
+                    <span class="unit-badge">Unidad 1</span>
+                    <h3>Enteros (Integer)</h3>
+                </div>
+                <p>Estudio de los tipos de datos numéricos enteros, sus operaciones aritméticas fundamentales, operadores de módulo, división entera y su representación en memoria.</p>
+                
+                <ul class="topics-list">
+                    <li>Operaciones básicas (+, -, *, /)</li>
+                    <li>División entera (//) y Módulo (%)</li>
+                    <li>Jerarquía de operadores numéricos</li>
+                    <li>Descomposición de números dígito por dígito</li>
+                </ul>
+
+                <div class="code-block">
+                    <div class="code-title">Ejemplo Python: Operaciones con Enteros</div>
+<pre><code># Descomposición de un número entero
+numero = 456
+ultimo_digito = numero % 10   # Resultado: 6
+resto = numero // 10          # Resultado: 45
+
+print(f"Último dígito: {ultimo_digito}, Resto: {resto}")
+</code></pre>
+                </div>
+            </article>
+
+            <!-- Unidad 2: Cadenas -->
+            <article class="unit-card" id="cadenas">
+                <div class="unit-header">
+                    <span class="unit-badge">Unidad 2</span>
+                    <h3>Cadenas (Strings)</h3>
+                </div>
+                <p>Manipulación de datos alfanuméricos, secuencias de caracteres, inmutabilidad, indexing, slicing y métodos predefinidos para la transformación de texto.</p>
+                
+                <ul class="topics-list">
+                    <li>Indexación y Slicing (subcadenas)</li>
+                    <li>Concatenación y repetición</li>
+                    <li>Métodos principales: <code>upper()</code>, <code>lower()</code>, <code>replace()</code>, <code>split()</code></li>
+                    <li>Inmutabilidad de cadenas</li>
+                </ul>
+
+                <div class="code-block">
+                    <div class="code-title">Ejemplo Python: Manipulación de Cadenas</div>
+<pre><code>texto = "Universidad Catolica Boliviana"
+
+# Slicing (Obtener subcadena)
+sigla = texto[0] + texto[12] + texto[21]  # UCB
+
+# Métodos
+en_mayusculas = texto.upper()
+palabras = texto.split(" ")  # ['Universidad', 'Catolica', 'Boliviana']
+
+print(f"Sigla: {sigla} | Palabras: {len(palabras)}")
+</code></pre>
+                </div>
+            </article>
+
+            <!-- Unidad 3: Listas -->
+            <article class="unit-card" id="listas">
+                <div class="unit-header">
+                    <span class="unit-badge">Unidad 3</span>
+                    <h3>Listas (Arrays)</h3>
+                </div>
+                <p>Estructuras de datos lineales mutables y dinámicas. Recorrido, ordenamiento, búsqueda e inserción de elementos en colecciones ordenadas.</p>
+                
+                <ul class="topics-list">
+                    <li>Creación y modificación de listas</li>
+                    <li>Inserción y eliminación: <code>append()</code>, <code>insert()</code>, <code>pop()</code>, <code>remove()</code></li>
+                    <li>Iteración con bucles (<code>for</code>, <code>while</code>)</li>
+                    <li>Búsqueda y ordenamiento básico</li>
+                </ul>
+
+                <div class="code-block">
+                    <div class="code-title">Ejemplo Python: Operaciones con Listas</div>
+<pre><code>notas = [85, 92, 78, 60, 95]
+
+# Agregar y modificar
+notas.append(88)
+notas[0] = 90
+
+# Recorrido con filtro
+aprobados = [n for n in notas if n >= 51]
+
+print(f"Notas aprobadas: {aprobados}")
+</code></pre>
+                </div>
+            </article>
+
+            <!-- Unidad 4: Diccionarios (Matrices) -->
+            <article class="unit-card" id="diccionarios">
+                <div class="unit-header">
+                    <span class="unit-badge">Unidad 4</span>
+                    <h3>Diccionarios (Matrices)</h3>
+                </div>
+                <p>Estructuras de datos asociativas organizadas mediante clave-valor. Aplicación avanzada para la representación de tablas, registros complejas y matrices bidimensionales.</p>
+                
+                <ul class="topics-list">
+                    <li>Estructura Clave-Valor (Key-Value)</li>
+                    <li>Acceso, adición y eliminación de claves</li>
+                    <li>Representación de matrices mediante listas anidadas o diccionarios</li>
+                    <li>Iteración de claves y valores (<code>items()</code>, <code>keys()</code>, <code>values()</code>)</li>
+                </ul>
+
+                <div class="code-block">
+                    <div class="code-title">Ejemplo Python: Diccionarios y Representación Bidimensional</div>
+<pre><code># Representación de un estudiante (Diccionario)
+estudiante = {
+    "nombre": "Carlos Perez",
+    "carrera": "Ingeniería de Sistemas",
+    "parciales": [80, 75, 90]
+}
+
+# Matriz bidimensional representada como diccionario de coordenadas
+matriz = {
+    (0, 0): 1, (0, 1): 0,
+    (1, 0): 0, (1, 1): 1
+}
+
+print(f"Estudiante: {estudiante['nombre']} | Diagonal Matriz: {matriz[(0,0)]}")
+</code></pre>
+                </div>
+            </article>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Universidad Católica Boliviana "San Pablo"</strong> &copy; 2026</p>
+        <p>Asignatura: Programación 1 | Departamento de Ciencias Exactas e Ingeniería</p>
+    </footer>
+
+    <!-- JavaScript para interactividad -->
+    <script>
+        // Menu toggle para dispositivos móviles
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Highlight activo en la barra lateral al desplazarse
+        const sections = document.querySelectorAll('.unit-card');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
